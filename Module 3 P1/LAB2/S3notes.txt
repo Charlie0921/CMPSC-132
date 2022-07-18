@@ -1,0 +1,60 @@
+    ''' 
+        >>> p1 = Point2D(-7, -9)
+        >>> p2 = Point2D(1, 5.6)
+        >>> line1 = Line(p1, p2)
+        >>> line1.getDistance()
+        16.648
+        >>> line1.getSlope
+        1.825
+        >>> line1
+        y = 1.825x + 3.775
+        >>> line2 = line1*4
+        >>> line2.getDistance
+        66.592
+        >>> line2.getSlope
+        1.825
+        >>> line2
+        y = 1.825x + 15.1
+        >>> line1
+        y = 1.825x + 3.775
+        >>> line3 = 4*line1
+        >>> line3
+        y = 1.825x + 15.1
+        >>> line1==line2
+        False
+        >>> line3==line2
+        True
+        >>> line5=Line(Point2D(6,48),Point2D(9,21))
+        >>> line5
+        y = -9.0x + 102.0
+        >>> line5==9
+        False
+        >>> line6=Line(Point2D(2,6), Point2D(2,3))
+        >>> line6.getDistance
+        3.0
+        >>> line6.getSlope
+        inf
+        >>> isinstance(line6.getSlope, float)
+        True
+        >>> line6
+        Undefined
+        >>> line7=Line(Point2D(6,5), Point2D(9,5))
+        >>> line7.getSlope
+        0.0
+        >>> line7
+        y = 5.0
+    '''
+
+
+    def __mul__(self, num):
+      origin = Line(self.point1, self.point2)
+      self.p1x = self.p1x * num
+      self.p1y = self.p1y * num
+      self.p2x = self.p2x * num
+      self.p2y = self.p2y * num
+      print("num",num)
+      print(self.p1x)
+      print(self.p1y)
+      print(self.p2x)
+      print(self.p2y)
+      return other

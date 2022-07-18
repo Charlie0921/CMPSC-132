@@ -1,0 +1,49 @@
+if self.root.right == None:
+        return self.root
+
+      else:
+        max = BinarySearchTree().getMax(self)
+        right = max.right
+        print(right)
+        return right
+
+ print("hi",self.root)
+      print("left",self.root.left)
+      print("left",self.root.left.left)
+      print("left",self.root.left.left.left)
+
+
+if node is None:
+        return None
+      else:
+        leftSide = BinarySearchTree._mirrorHelper(self,node.left)
+        rightSide = BinarySearchTree._mirrorHelper(self,node.right)
+######################
+
+def _containsHelper(self, node, b):
+      if node is not None:
+        print(node,node.left,node.right)
+        if node.value == b:
+          return True
+        else:
+          self._containsHelper(node.left,b)
+          self._containsHelper(node.right,b)
+############################
+if node is not None and node.value == b:
+        print(node,node.left,node.right)
+        return True
+
+      elif node is not None:
+        self._containsHelper(node.left,b)
+        self._containsHelper(node.right,b)
+
+###########################
+def _containsHelper(self, node, b):
+      if node is not None:
+        print(node,node.left,node.right)
+        if node.value == b:
+          return True
+        elif node.value > value:
+          self._containsHelper(node.left,b)
+        elif node.vaue < value:
+          self._containsHelper(node.right,b)

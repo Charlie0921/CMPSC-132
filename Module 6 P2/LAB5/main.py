@@ -1,0 +1,184 @@
+# LAB 5
+# REMINDER: The work in this assignment must be your own original work and must be completed alone.
+# Don't forget to list any authorized forms of collaboration using a Collaboration Statement
+
+
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+        
+    def __str__(self):
+        return ("Node({})".format(self.value)) 
+
+    __repr__ = __str__
+
+
+class BinarySearchTree:
+    '''
+        >>> x=BinarySearchTree()
+        >>> x.isEmpty()
+        True
+        >>> x.insert(9)
+        >>> x.insert(4)
+        >>> x.insert(11)
+        >>> x.insert(2)
+        >>> x.insert(5)
+        >>> x.insert(10)
+        >>> x.insert(9.5)
+        >>> x.insert(7)
+        >>> x.getMin
+        Node(2)
+        >>> x.getMax
+        Node(11)
+        >>> 1 in x
+        False
+        >>> 234 in x
+        False
+        >>> 67 in x
+        False
+        >>> 9 in x
+        True
+        >>> 4 in x
+        True
+        >>> 9.5 in x
+        True
+        >>> 11 in x
+        True
+        >>> 7 in x
+        True
+        >>> 5 in x
+        True
+        >>> x.isEmpty()
+        False
+        >>> x.getHeight(x.root)   # Height of the tree
+        3
+        >>> x.getHeight(x.root.left.right)
+        1
+        >>> x.getHeight(x.root.right)
+        2
+        >>> x.getHeight(x.root.right.left)
+        1
+        >>> x.printInorder
+        2 : 4 : 5 : 7 : 9 : 9.5 : 10 : 11 : 
+        >>> new_tree = x.mirror()
+        11 : 10 : 9.5 : 9 : 7 : 5 : 4 : 2 : 
+        >>> new_tree.root.right
+        Node(4)
+        >>> x.printInorder
+        2 : 4 : 5 : 7 : 9 : 9.5 : 10 : 11 : 
+    '''
+    def __init__(self):
+        self.root = None
+
+
+    def insert(self, value):
+        if self.root is None:
+            self.root=Node(value)
+        else:
+            self._insert(self.root, value)
+
+
+    def _insert(self, node, value):
+        if(value<node.value):
+            if(node.left==None):
+                node.left = Node(value)
+            else:
+                self._insert(node.left, value)
+        else:   
+            if(node.right==None):
+                node.right = Node(value)
+            else:
+                self._insert(node.right, value)
+    
+    @property
+    def printInorder(self):
+        if self.isEmpty(): 
+            return None
+        else:
+            self._inorderHelper(self.root)
+        
+    def _inorderHelper(self, node):
+        if node is not None:
+            self._inorderHelper(node.left) 
+            print(node.value, end=' : ') 
+            self._inorderHelper(node.right)         
+
+
+    def mirror(self):
+        # Creates a new BST that is a mirror of self: 
+        #    Elements greater than the root are on the left side, and smaller values on the right side
+        # Do NOT modify any given code
+        if self.root is None:
+            return None
+        else:
+            newTree = BinarySearchTree()
+            newTree.root = self._mirrorHelper(self.root)
+            newTree.printInorder
+            return newTree
+
+
+    def isEmpty(self): # if the root is None, the tree is empty
+      if self.root == None:
+        return True
+      else:
+        return False
+      
+
+    def _mirrorHelper(self, node):
+      
+      if node is None: #stop recursion when node is None
+        return None
+      else:
+        new = Node(node.value) #create new node with original node.value
+        new.right = self._mirrorHelper(node.left) #set new node.right with original node.left
+        new.left = self._mirrorHelper(node.right) #set new node.left with original node.right
+      return new
+
+
+    @property
+    def getMin(self): 
+      new = self.root
+      while new.left != None: #ouput the leftmost Node's value
+        new = new.left
+      return new
+      
+    @property
+    def getMax(self): 
+      new = self.root
+      while new.right != None: #output the rightmost Node's value
+        new = new.right
+      return new
+
+    def __contains__(self,value):
+        if self.isEmpty(): #if the tree is empty, output None
+          return None
+        else: #otherwise call containshelper
+          return self._containsHelper(self.root,value)
+
+
+    def _containsHelper(self, node, b):
+      if node is not None:
+        if node.value == b: #if value and current Node's value are equal, output True
+          return True
+        elif node.value > b: #if value is smaller than current Node's value, recall containshelper with current node's left
+          return self._containsHelper(node.left,b)
+        elif node.value < b: #if value is greater than current Node's value, recall containshelper with current node's right
+          return self._containsHelper(node.right,b)
+
+
+    def getHeight(self, node):
+        # YOUR CODE STARTS HERE
+      if node is None: #stops recursion when node is None
+        return -1
+      else:
+        rightSide = BinarySearchTree.getHeight(self,node.right)
+        leftSide = BinarySearchTree.getHeight(self,node.left)
+        
+        if rightSide > leftSide: #compare the height of right and left side
+          return rightSide + 1
+        else:
+          return leftSide + 1
+
+

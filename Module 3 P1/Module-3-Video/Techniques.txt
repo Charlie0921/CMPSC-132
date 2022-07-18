@@ -1,0 +1,11 @@
+<Techniques for Designing classes>
+#UML Diagram Example
+1. Top section: name of the classes
+2. Middle section: list of data attributes
+3. Bottom section: list of class methods
+
+
+<Finding classes in a problem>
+1. Written description of the problem domain
+2. Identify all nouns in the description
+3. Refine the list of nouns

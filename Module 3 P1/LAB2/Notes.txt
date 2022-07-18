@@ -1,0 +1,13 @@
+    def next(self):
+        #--- YOUR CODE STARTS HERE
+        Name = Fibonacci()
+        Name.start = 1024
+        return Name
+        
+        pass
+
+Hi Charlie,
+You have the right idea but the wrong approach. So firstly, the output of __mul__ should return a new instance of Line.  You need to create a new instance of Line which is the exact copy and then make modification. So, create a new line using the same points , i.e. Line(self.point1,self.point2) and save this to a variable. Then individually modify all the 4 coordinates of these 2 points. So, let's say we make a new instance of Line called y.
+we must do y.p1x *= other and so on for the other 3 coordinates. Then finally output the new instance.
+
+For the hint about switching line*int and int*line. Consider using __rmul__ in a similar manner to what we did in recitation.
